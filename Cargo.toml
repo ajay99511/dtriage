@@ -1,0 +1,75 @@
+[package]
+name = "dtriage"
+version = "0.1.0"
+edition = "2021"
+authors = ["Downloads Triage Team"]
+description = "A lightweight Rust background service that monitors the Downloads folder"
+license = "MIT OR Apache-2.0"
+keywords = ["file-organization", "downloads", "automation", "cli"]
+categories = ["command-line-utilities", "filesystem"]
+
+[dependencies]
+# Async Runtime
+tokio = { version = "1.35", features = ["full"] }
+
+# File Watching
+notify-debouncer-full = "0.3"
+
+# CLI
+clap = { version = "4.4", features = ["derive", "env"] }
+
+# SQLite (Async with compile-time verification)
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "sqlite", "chrono"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+tracing-appender = "0.2"
+
+# Security
+keyring = "2.3"
+
+# Filesystem
+path-clean = "1.0"
+camino = "1.1"
+tempfile = "3.9"
+
+# Hashing
+sha2 = "0.10"
+hex = "0.4"
+
+# HTTP Client (for LLM)
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+async-openai = "0.19"
+
+# Error Handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Cross-platform directories
+dirs = "5.0"
+
+[dev-dependencies]
+# Testing
+proptest = "1.4"
+mockall = "0.12"
+tokio-test = "0.4"
+
+# Benchmarking
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bin]]
+name = "dtriage"
+path = "src/main.rs"
+
+[[bench]]
+name = "performance"
+harness = false

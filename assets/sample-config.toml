@@ -1,0 +1,67 @@
+# Downloads Triage Agent - Sample Configuration
+# Copy this file to your config directory and customize as needed
+
+# Path to Downloads folder
+downloads_dir = "C:\\Users\\YourName\\Downloads"
+
+# Data directory (SQLite, logs)
+data_dir = "C:\\Users\\YourName\\AppData\\Local\\downloads-triage\\data"
+
+# Dry-run mode (default: true)
+# When true, files are categorized but not moved
+dry_run = true
+
+# Log level (debug, info, warn, error)
+log_level = "info"
+
+# LLM configuration (optional)
+# Uncomment and configure to enable AI-powered file naming
+# [llm]
+# enabled = true
+# model = "gpt-4"
+# api_key_service = "openai"
+
+# Categorization rules
+# Rules are evaluated by priority (higher first)
+
+[[rules]]
+name = "Documents"
+extensions = ["pdf", "doc", "docx", "txt", "rtf"]
+destination = "Documents"
+priority = 10
+
+[[rules]]
+name = "Images"
+extensions = ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp"]
+destination = "Pictures"
+priority = 10
+
+[[rules]]
+name = "Videos"
+extensions = ["mp4", "avi", "mkv", "mov", "wmv", "flv"]
+destination = "Videos"
+priority = 10
+
+[[rules]]
+name = "Music"
+extensions = ["mp3", "wav", "flac", "aac", "ogg", "wma"]
+destination = "Music"
+priority = 10
+
+[[rules]]
+name = "Archives"
+extensions = ["zip", "rar", "7z", "tar", "gz", "bz2"]
+destination = "Archives"
+priority = 10
+
+[[rules]]
+name = "Installers"
+extensions = ["exe", "msi", "dmg", "pkg"]
+destination = "Installers"
+priority = 20
+
+[[rules]]
+name = "Code"
+extensions = ["js", "ts", "py", "rs", "go", "java", "cpp", "c", "h", "cs", "php", "rb", "sh"]
+destination = "Code"
+priority = 10
