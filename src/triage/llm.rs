@@ -9,6 +9,7 @@ use crate::security;
 pub struct LlmClient {
     model: String,
     api_key_service: String,
+    api_base: String,
     client: Client,
 }
 
@@ -36,10 +37,11 @@ struct Choice {
 }
 
 impl LlmClient {
-    pub fn new(model: String, api_key_service: String) -> Self {
+    pub fn new(model: String, api_key_service: String, api_base: Option<String>) -> Self {
         Self {
             model,
             api_key_service,
+            api_base: api_base.unwrap_or_else(|| "https://api.openai.com/v1".to_string()),
             client: Client::new(),
         }
     }
@@ -71,9 +73,11 @@ impl LlmClient {
             max_tokens: 50,
         };
 
+        let url = format!("{}/chat/completions", self.api_base);
+        
         let response = self
             .client
-            .post("https://api.openai.com/v1/chat/completions")
+            .post(&url)
             .header("Authorization", format!("Bearer {}", api_key))
             .header("Content-Type", "application/json")
             .json(&request)

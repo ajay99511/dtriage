@@ -42,6 +42,9 @@ pub struct LlmConfig {
     /// Model to use (e.g., "gpt-4", "ollama/llama2")
     pub model: String,
 
+    /// Optional custom API base URL for OpenAI-compatible endpoints
+    pub api_base: Option<String>,
+
     /// Enable LLM-based naming
     pub enabled: bool,
 }
